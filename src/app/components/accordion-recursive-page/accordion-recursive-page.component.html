@@ -1,28 +1,22 @@
-<ng-container *ngIf="first">
-  <h2>Accordion-page</h2>
-  <p-accordion>
+<ng-container *ngIf="data !== 5; then outer; else inner"></ng-container>
+<ng-template #outer>
 
+  <p-accordionTab header='Header 1'>
+    {{data}}
+  </p-accordionTab>
+  <p-accordionTab [header]="data">
+    <p-accordion>
+      <app-accordion-recursive-page [first]="false" [data]="data + 1"></app-accordion-recursive-page>
+
+      <app-accordion-recursive-page [first]="false" [data]="data + 1"></app-accordion-recursive-page>
+    </p-accordion>
+  </p-accordionTab>
+</ng-template>
+
+<ng-template #inner>
+  <ng-container>
     <p-accordionTab header='Header 1'>
-      content 1
+      {{data}}
     </p-accordionTab>
-
-    <p-accordionTab header='Header 2'>
-      <app-accordion-recursive-page [first]="false"></app-accordion-recursive-page>
-    </p-accordionTab>
-
-    <p-accordionTab header='Header 3'>
-      <app-accordion-recursive-page [first]="false"></app-accordion-recursive-page>
-    </p-accordionTab>
-
-  </p-accordion>
-</ng-container>
-
-<ng-container *ngIf="!first">
-  <p-accordion>
-
-    <p-accordionTab header='Header 1'>
-      content 1
-    </p-accordionTab>
-
-  </p-accordion>
-</ng-container>
+  </ng-container>
+</ng-template>
